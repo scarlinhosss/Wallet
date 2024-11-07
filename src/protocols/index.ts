@@ -1,2 +1,2 @@
-export * from "./authentication-protocol";
+export * from "./user-protocol";
 export * from "./error-protocols"
