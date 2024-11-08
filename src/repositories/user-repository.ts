@@ -1,9 +1,14 @@
 import { prisma } from "../config/index";
+import { userParams } from "../protocols";
 
-async function createUser(data)
+ function createUser(data: userParams) {
+    return prisma.user.create({
+        data,
+    });
+}
 
 const userRepository = {
-    postUser,
+    createUser,
 };
 
 export default userRepository;
