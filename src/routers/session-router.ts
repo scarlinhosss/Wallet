@@ -1,12 +1,12 @@
 import { Router } from "express";
 
-import { upsertSession } from "../controllers";
 import { validateBody } from "../middlewares";
 import { sessionSchema } from "../schemas";
+import { upsertSession } from "../controllers";
 
 const sessionRouter = Router();
 
-sessionRouter.post("/:id", validateBody(sessionSchema), upsertSession);
+sessionRouter.post("/", validateBody(sessionSchema), upsertSession);
 
 export { sessionRouter };
 
