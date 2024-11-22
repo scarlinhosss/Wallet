@@ -1,49 +1,20 @@
-import { Response, Request } from "express";
-import httpStatus from "http-status";
+import { Response, Request, response } from "express";
+import httpStatus, { BAD_REQUEST, OK } from "http-status";
 import sessionServices from "../services/session-service";
-
-/*export async function upsertSession(req: Request, res: Response) {
-    const id = Number(req.params.id);
-    const {
-        token,
-    } = req.body;
-    try {
-        const session = await sessionServices.upsertSession(id, { token });
-        return res.status(httpStatus.OK).send(session)
-    } catch (error) {
-        console.log(error);
-        return res
-        .status(httpStatus.INTERNAL_SERVER_ERROR)
-        .send("Não foi possível realizar a operação.")
-    }
-}
-*/
-
-/* export async function upsertSession(req: Request, res: Response) {
-    const id = Number(req.params.id);
-    const {
-        token,
-    } = req.body;
-    try {
-        const session = await sessionServices.upsertSession(id, { token });
-        return res.status(httpStatus.OK).send(session);
-    } catch(error) {
-        console.log(error);
-        return res
-        .status(httpStatus.INTERNAL_SERVER_ERROR)
-        .send("Não foi possível concluir a operação.")
-    }
-} */
+import { SessionParams } from "../protocols";
 
 export async function upsertSession(req: Request, res: Response) {
-    const SessionParams = req.body;
+    const { id, email, password } = req.body as SessionParams;
+
+    if ((!id && id !== 0 || !email || isNaN(id)))
+        return response.status(httpStatus.BAD_REQUEST).send("Parâmetros não encontrados ou incorretos");
+    
     try {
-        const session = await sessionServices.upsertSession(SessionParams.id, SessionParams.token);
-        return res.status(httpStatus.OK).send(session);
-    } catch(error) {
+        await sessionServices.upsertSession({ id, email, password });
+        return res.status(httpStatus.OK).send(id ? "Sessão encerrada com sucesso" : "Sessão criada com sucesso");
+    } catch (error) {
         console.log(error);
-        return res
-        .status(httpStatus.INTERNAL_SERVER_ERROR)
-        .send("Não foi possível concluir a operação.")
+        
+        return res.status(httpStatus.INTERNAL_SERVER_ERROR).send("Ocorreu um erro inesperado");
     }
 }

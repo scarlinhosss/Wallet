@@ -7,8 +7,17 @@ import { userParams } from "../protocols";
     });
 }
 
+ function findUseryByEmail(email: string) {
+    return prisma.user.findFirst({
+        where: {
+            email,
+        },
+    });
+ }
+
 const userRepository = {
     createUser,
+    findUseryByEmail,
 };
 
 export default userRepository;

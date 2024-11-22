@@ -1,4 +1,7 @@
 export type SessionParams = {
     id: number,
-    token: string,
+    email: string,
+    password: string,
+    token?: string,
+    userId?: number,
 }
