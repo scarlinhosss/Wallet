@@ -17,7 +17,7 @@ async function upsertSession(data: SessionParams) {
     
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET || "");
 
-    await sessionRepository.upsertSession({ ...data, token, userId: user.id });
+    await sessionRepository.upsertSession({ ...data, token }, user.id);
 }
 
 async function validatePasswordOrFail(password: string, hash_password: string) {

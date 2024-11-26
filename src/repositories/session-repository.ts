@@ -1,14 +1,14 @@
 import { prisma } from "../config";
 import { SessionParams} from "../protocols";
 
-async function upsertSession(data: SessionParams) {
+async function upsertSession(data: SessionParams, userId: number) {
     await prisma.session.upsert({
         where: {
             id: data.id,
         },
         create: {
             id: data.id,
-            userId: data.userId!,
+            userId: userId!,
             token: data.token!,
         },
         update: {

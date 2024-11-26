@@ -3,6 +3,7 @@ import { SessionParams } from "../protocols";
 import passwordComplexity from "joi-password-complexity";
 
 export const sessionSchema = Joi.object<SessionParams>({
+    id: Joi.number().allow(0),
     email: Joi.string().email().required(),
     password: passwordComplexity({
         min: 8,
@@ -12,6 +13,4 @@ export const sessionSchema = Joi.object<SessionParams>({
         upperCase: 1,
         lowerCase: 1,
     }),
-    token: Joi.string(),
-    userId: Joi.number(),
-})
+});

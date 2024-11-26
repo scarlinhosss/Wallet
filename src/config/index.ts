@@ -1,1 +1,2 @@
-export * from "./databases"
+export * from "./databases";
+export * from "./envs";

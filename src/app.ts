@@ -7,4 +7,21 @@ import { sessionRouter } from "./routers";
 
 loadEnv();
 
-sessionRouter
+const app = express();
+
+app
+  .use(cors())
+  .use(express.json())
+  .get("/health", (_req, res) => { res.send("OK!") })
+  .use("/session", sessionRouter);
+
+  export function init() {
+    connectDB();
+    return Promise.resolve(app);
+  }
+
+  export async function close() {
+    await disconnectDB();
+  }
+
+  export default app;
