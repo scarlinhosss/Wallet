@@ -7,7 +7,7 @@ export function validateBody<T>(schema:ObjectSchema<T>): ValidationMiddleware {
     return validate(schema, "body");
 }
 
-export function validaeParams<T>(schema:ObjectSchema<T>): ValidationMiddleware {
+export function validateParams<T>(schema:ObjectSchema<T>): ValidationMiddleware {
     return validate(schema, "params");
 }
 
