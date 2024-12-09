@@ -6,7 +6,7 @@ import { userParams } from "../protocols";
         data: {
             name: data.name,
             email: data.email,
-            //hash_password: data.password,
+            hash_password: data.password,
         },
     });
 }
