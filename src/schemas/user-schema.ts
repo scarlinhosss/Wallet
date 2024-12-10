@@ -13,12 +13,5 @@ export const userSchema = Joi.object<userParams>({
         upperCase: 1,
         lowerCase: 1,
     }),
-    password_confirmation: passwordComplexity({
-        min: 8,
-        max: 50,
-        symbol: 2,
-        numeric: 1,
-        upperCase: 1,
-        lowerCase: 1,
-    })
+    password_confirmation: Joi.ref("password")
 })

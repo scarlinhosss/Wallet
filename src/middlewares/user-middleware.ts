@@ -22,7 +22,7 @@ export function validate(schema: ObjectSchema, type: "body" | "params") {
         } else {
             // eslint-disable-next-line no-console
             console.log(error);
-            res.status(httpStatus.BAD_REQUEST).send(errorMessages.generic);  
+            res.status(httpStatus.BAD_REQUEST).send(errorMessages.invalidFields);  
         }
     }
 }

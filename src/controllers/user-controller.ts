@@ -15,7 +15,7 @@ export async function createUser(req: Request, res: Response) {
         console.log(error);
         res
             .status(httpStatus.INTERNAL_SERVER_ERROR)
-            .send(errorMessages.generic);
+            .send(errorMessages.duplicatedEmail);
 
         return;
     }
