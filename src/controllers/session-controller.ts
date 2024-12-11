@@ -3,6 +3,7 @@ import httpStatus from "http-status";
 import sessionServices from "../services/session-service";
 import { SessionParams } from "../protocols";
 import { errorMessages } from "../utils/error-utils";
+import dotenv from "dotenv";
 
 export async function upsertSession(req: Request, res: Response) {
     const { id, email, password } = req.body as SessionParams;

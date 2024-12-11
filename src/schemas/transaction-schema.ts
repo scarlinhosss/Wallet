@@ -6,4 +6,5 @@ export const transactionSchema = Joi.object<transactionParams>({
     description: Joi.string().min(1).required().pattern(/^[a-zA-Záàâãéèêíïóôõöúçñ ]+$/),
     value: Joi.number().required(),
     type: Joi.string().required(),
+    userId: Joi.number().required(),
 });

@@ -3,6 +3,7 @@ import { SessionParams } from "../protocols";
 import httpStatus from "http-status";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import dotenv from "dotenv"
 import sessionRepository from "../repositories/session-repository"
 import userRepository from "../repositories/user-repository";
 import { invalidCredentialsError } from "../errors";
