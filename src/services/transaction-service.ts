@@ -7,17 +7,18 @@ async function createTransaction(data: transactionParams) {
     return transactionRepository.createTransaction(data)
 }
 
-async function getTransaction() {
-    const list = await prisma.transaction.findMany();
-    
-    if (!list || !list[0]) throw notFoundError();
+async function getIdTransaction(id: number) {
+    return transactionRepository.getIdTransaction(id);
+}
 
-    return list;
+async function getUserTransaction(userId: number) {
+    return transactionRepository.getUserTransaction(userId);
 }
 
 const transactionServices = {
     createTransaction,
-    getTransaction,
+    getIdTransaction,
+    getUserTransaction,
 }
 
 export default transactionServices;
