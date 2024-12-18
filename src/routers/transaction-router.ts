@@ -8,7 +8,7 @@ const transactionRouter = Router();
 
 transactionRouter.post("/", validateBody(transactionSchema), createTransaction);
 transactionRouter.get("/:id", getIdTransaction);
-transactionRouter.get("/transactions/:userId", getUserTransaction);
+transactionRouter.get("/user/:userId", getUserTransaction);
 
 export { transactionRouter };
 
