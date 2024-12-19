@@ -37,8 +37,7 @@ export async function getIdTransaction(req: Request, res: Response) {
 
 export async function getUserTransaction(req: AuthenticatedRequest, res: Response) {
     const { userId } = req;
-    console.log(userId);
-    //if(!userId && !isNaN(userId)) return res.status(httpStatus.BAD_REQUEST).send(errorMessages.missingValues);
+    if(!userId && !isNaN(userId)) return res.status(httpStatus.BAD_REQUEST).send(errorMessages.missingValues);
 
     try {
         const transactions = await transactionServices.getUserTransaction(userId);

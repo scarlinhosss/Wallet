@@ -8,9 +8,11 @@ import { authenticateToken } from "../middlewares/authenticate-token";
 
 const transactionRouter = Router();
 
-transactionRouter.post("/", validateBody(transactionSchema), createTransaction);
-transactionRouter.get("/:id", getIdTransaction);
-transactionRouter.get("/user/:userId", authenticateToken ,getUserTransaction);
+transactionRouter
+    .all("/*", authenticateToken)
+    .post("/", validateBody(transactionSchema), createTransaction)
+    .get("/:id", getIdTransaction)
+    .get("/user/:userId", getUserTransaction);
 
 export { transactionRouter };
 

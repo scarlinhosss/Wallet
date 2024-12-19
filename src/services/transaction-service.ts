@@ -12,6 +12,7 @@ async function getIdTransaction(id: number) {
 }
 
 async function getUserTransaction(userId: number) {
+    
     return transactionRepository.getUserTransaction(userId);
 }
 

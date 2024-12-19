@@ -7,9 +7,8 @@ async function upsertSession(data: SessionParams, userId: number) {
             id: data.id,
         },
         create: {
-            id: data.id,
-            userId: userId!,
-            token: data.token!,
+            userId: userId,
+            token: data.token,
         },
         update: {
             closedAt: new Date(),
