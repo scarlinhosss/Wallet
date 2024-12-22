@@ -1,6 +1,6 @@
 import { EntryType } from "@prisma/client"
 
-export type transactionParams = {
+export type transactionParams = { 
     id: number,
     description: string,
     value: number,

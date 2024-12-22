@@ -5,17 +5,14 @@ import { prisma } from "../config"
 
 export async function authenticateToken(req: AuthenticatedRequest, res: Response, next: NextFunction) {
     const authHeader = req.header("Authorization");
-    if(!authHeader) {
-        res.status(httpStatus.UNAUTHORIZED).send(errorMessages.unauthorized);
-        return;
-    }
+    if(!authHeader) 
+        return res.status(httpStatus.UNAUTHORIZED).send(errorMessages.unauthorized);
 
     const token = authHeader.replace("Bearer ", "");
 
-    if(!token) {
-        res.status(httpStatus.UNAUTHORIZED).send(errorMessages.unauthorized);
-        return;
-    }
+    if(!token)
+        return res.status(httpStatus.UNAUTHORIZED).send(errorMessages.unauthorized);
+
     try{
         const session = await prisma.session.findFirst({
             where: {
@@ -23,18 +20,15 @@ export async function authenticateToken(req: AuthenticatedRequest, res: Response
                 closedAt: null,
             },
         });
-        if(!session) {
-            res.status(httpStatus.UNAUTHORIZED).send(errorMessages.unauthorized);
-            return;
-        }
+        if(!session)
+            return res.status(httpStatus.UNAUTHORIZED).send(errorMessages.unauthorized);
 
         req.userId = session.userId;
 
         next();
         return;
     } catch(error) {
-        res.status(httpStatus.INTERNAL_SERVER_ERROR).send(errorMessages.generic);
-        return;
+        return res.status(httpStatus.INTERNAL_SERVER_ERROR).send(errorMessages.generic);
     }
 }
 export type AuthenticatedRequest = Request & { userId: number };

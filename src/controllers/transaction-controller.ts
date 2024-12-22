@@ -9,29 +9,22 @@ export async function createTransaction(req: Request, res: Response) {
     const { id,description, value, type, userId } = req.body as transactionParams;
 
     try {
+        //value*=100;
         await transactionServices.createTransaction({ id, description, value, type, userId });
         res.status(httpStatus.OK).send("Transação registrada com sucesso");
     } catch (error: any) {
         console.log(error);
-        res
-            .status(httpStatus.INTERNAL_SERVER_ERROR)
-            .send(errorMessages.generic);
-
-        return;
+        return res.status(httpStatus.INTERNAL_SERVER_ERROR).send(errorMessages.generic);
     }
 }
 
-export async function getIdTransaction(req: Request, res: Response) {
+export async function getTransactionById(req: Request, res: Response) {
     const id = Number(req.params.id);
     try {
-        const transaction = await transactionServices.getIdTransaction(id);
+        const transaction = await transactionServices.getTransactionById(id);
         res.status(httpStatus.OK).send(transaction);
     } catch (error) {
-        res
-        .status(httpStatus.INTERNAL_SERVER_ERROR)
-        .send("Não foi possível realizar o Get.")
-        
-        return;
+        return res.status(httpStatus.INTERNAL_SERVER_ERROR).send("Não foi possível realizar o Get.");
     }
 }
 
@@ -41,12 +34,8 @@ export async function getUserTransaction(req: AuthenticatedRequest, res: Respons
 
     try {
         const transactions = await transactionServices.getUserTransaction(userId);
-        res.status(httpStatus.OK).send(transactions);
-        return;
+        return res.status(httpStatus.OK).send(transactions);
     } catch (error) {
-        res
-        .status(httpStatus.INTERNAL_SERVER_ERROR).send(errorMessages.generic);
-        
-        return;
+        return res.status(httpStatus.INTERNAL_SERVER_ERROR).send(errorMessages.generic);
     }
 }

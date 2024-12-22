@@ -7,7 +7,7 @@ async function createTransaction(data: transactionParams) {
     })
 }
 
-async function getIdTransaction(id: number) {
+async function getTransactionById(id: number) {
     return prisma.transaction.findUnique({
         where: {
             id,
@@ -25,7 +25,7 @@ async function getUserTransaction(userId: number) {
 
 const transactionRepository = {
     createTransaction,
-    getIdTransaction,
+    getTransactionById,
     getUserTransaction
 }
 

@@ -7,18 +7,17 @@ async function createTransaction(data: transactionParams) {
     return transactionRepository.createTransaction(data)
 }
 
-async function getIdTransaction(id: number) {
-    return transactionRepository.getIdTransaction(id);
+async function getTransactionById(id: number) {
+    return transactionRepository.getTransactionById(id);
 }
 
 async function getUserTransaction(userId: number) {
-    
     return transactionRepository.getUserTransaction(userId);
 }
 
 const transactionServices = {
     createTransaction,
-    getIdTransaction,
+    getTransactionById,
     getUserTransaction,
 }
 

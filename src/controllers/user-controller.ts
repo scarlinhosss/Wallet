@@ -13,10 +13,6 @@ export async function createUser(req: Request, res: Response) {
         res.status(httpStatus.OK).send("Usuário criado com sucesso");
     } catch (error: any) {
         console.log(error);
-        res
-            .status(httpStatus.INTERNAL_SERVER_ERROR)
-            .send(errorMessages.duplicatedEmail);
-
-        return;
+        return res.status(httpStatus.INTERNAL_SERVER_ERROR).send(errorMessages.duplicatedEmail);
     }
 }
