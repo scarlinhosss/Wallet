@@ -7,3 +7,11 @@ export type transactionParams = {
     type: EntryType,
     userId: number,
 }
+
+export type transactionResponse = { 
+    id: number,
+    description: string,
+    value: string,
+    type: EntryType,
+    userId: number,
+}

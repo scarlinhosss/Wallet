@@ -1,37 +1,34 @@
 import { prisma } from "../config";
 import { notFoundError } from "../errors/not-found-error";
-import { transactionParams } from "../protocols";
+import { transactionParams, transactionResponse } from "../protocols";
 import transactionRepository from "../repositories/transaction-repository";
 
-export function multiplyValues(transactions: transactionParams[]): transactionParams[] {
+export function transactionValueHandle(transactions: transactionParams[]): transactionResponse[] {
     return transactions.map(transaction => ({
         ...transaction,
-        value: transaction.value * 100,
+        value: (transaction.value / 100).toFixed(2).replace(".", ","),
     }));
 }
 
 export async function calculateBalance(userId: number) {
     const transactions: transactionParams[] = await transactionRepository.getUserTransaction(userId);
 
-    const balance = transactions.reduce((total, transaction) => {
+    const balance = (transactions.reduce((total, transaction) => {
         return transaction.type === "income"
             ? total + transaction.value
             : total - transaction.value;
-    }, 0);
+    }, 0) / 100).toFixed(2).replace(".", ",");
 
     const result = {
-        transactions,
-        balance: balance / 100,
+        transactions: transactionValueHandle(transactions),
+        balance,
     };
 
     return result;
 }
 
 async function createTransaction(data: transactionParams) {
-    transactionRepository.createTransaction(data)
-    // isso não funcionou
-    data: data.value * 100;
-    return;
+    return transactionRepository.createTransaction({ ...data, value: data.value * 100 })
 }
 
 async function getTransactionById(id: number) {
