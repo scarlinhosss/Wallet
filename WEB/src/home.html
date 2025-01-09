@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyWallet</title>
+    <link rel="shortcut icon" href="../icons/wallet.png" type="image/x-icon">
     <link rel="stylesheet" href="megareset.css">
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="styles.css">
@@ -12,18 +13,94 @@
     <div class="home">
         <div class="topPage">
             <h1>Olá, Fulano</h1>
-            <img src="../icons/Vector.svg" alt="logout icon" class="icon">
+            <img src="../icons/logOut.svg" alt="logout icon" class="icon">
         </div>
         <div class="transactionTable">
-            <p>Não há registros de<br>entrada ou saída</p>
-        </div>
-        <a href="newIncome.html">
-            <div class="newIncomeButton">
-                <div class="plusIcon"></div>
-
-            
+            <!-- <p class="emptyText">Não há registros de entrada ou saída</p> -->
+            <div class="transactions">
+                <span class="transaction">
+                    <p class="date">01/03</p>
+                    <p class="description">Salário Meguel</p>
+                    <p class="income">R$10.000,00</p>
+                </span>
+                <span class="transaction">
+                    <p class="date">08/04</p>
+                    <p class="description">Almoço Nelson</p>
+                    <p class="expense">R$10,00</p>
+                </span>
+                <span class="transaction">
+                    <p class="date">04/04</p>
+                    <p class="description">Janta Meguel após campeonato de karatê</p>
+                    <p class="expense">R$4,00</p>
+                </span>
+                <span class="transaction">
+                    <p class="date">04/04</p>
+                    <p class="description">Janta Meguel após campeonato de karatê</p>
+                    <p class="expense">R$4,00</p>
+                </span>
+                <span class="transaction">
+                    <p class="date">04/04</p>
+                    <p class="description">Janta Meguel após campeonato de karatê</p>
+                    <p class="expense">R$4,00</p>
+                </span>
+                <span class="transaction">
+                    <p class="date">04/04</p>
+                    <p class="description">Janta Meguel após campeonato de karatê</p>
+                    <p class="expense">R$4,00</p>
+                </span>
+                <span class="transaction">
+                    <p class="date">04/04</p>
+                    <p class="description">Janta Meguel após campeonato de karatê</p>
+                    <p class="expense">R$4,00</p>
+                </span>
+                <span class="transaction">
+                    <p class="date">04/04</p>
+                    <p class="description">Janta Meguel após campeonato de karatê</p>
+                    <p class="expense">R$4,00</p>
+                </span>
+                <span class="transaction">
+                    <p class="date">04/04</p>
+                    <p class="description">Janta Meguel após campeonato de karatê</p>
+                    <p class="expense">R$4,00</p>
+                </span>
+                <span class="transaction">
+                    <p class="date">04/04</p>
+                    <p class="description">Janta Meguel após campeonato de karatê</p>
+                    <p class="expense">R$4,00</p>
+                </span>
+                <span class="transaction">
+                    <p class="date">04/04</p>
+                    <p class="description">Janta Meguel após campeonato de karatê</p>
+                    <p class="expense">R$4,00</p>
+                </span>
+                <span class="transaction">
+                    <p class="date">04/04</p>
+                    <p class="description">Janta Meguel após campeonato de karatê</p>
+                    <p class="expense">R$4,00</p>
+                </span>
             </div>
-        </a>
+            <div class="balance">
+                <span class="transaction">
+                    <p class="boldBalance">Saldo</p>
+                    <p class="income">R$9.986,00</p>
+                </span>
+            </div>
+
+        </div>
+        <div class="buttons">
+            <a href="newIncome.html">
+                <div class="newTransactionButton">
+                    <div class="transactionIcon">+</div>
+                    <h1>Nova<br>Entrada</h1>
+                </div>
+            </a>
+            <a href="newExpense.html">
+                <div class="newTransactionButton">
+                    <div class="transactionIcon">-</div>
+                    <h1>Nova<br>saída</h1>
+                </div>
+            </a>
+        </div>
     </div>
 </body>
 </html> 
