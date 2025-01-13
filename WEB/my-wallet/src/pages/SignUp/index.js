@@ -1,13 +1,13 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; 
 
 import Button from "../../Components/Button";
 import Input from "../../Components/Input";
 import { Container } from "./styles";
 
-export default function Login() {
-    const [form, setForm] = useState({ email: "", password: "" });
+export default function SignUp() {
+    const [form, setForm] = useState({name: "", email: "", password: "", password_confirmation: ""  });
 
     function handleChange({ name, value }) {
         setForm({ ...form, [name]: value });
@@ -24,6 +24,17 @@ export default function Login() {
         <Container>
             <h1>MyWallet</h1>
             <form onSubmit={handleSubmit}>
+                <Input
+                    type="text"
+                    id="name"
+                    placeholder="Nome"
+                    value={form.name}
+                    required
+                    onChange={(e) => handleChange({
+                        name: e.target.id,
+                        value: e.target.value,
+                    })}
+                />
                 <Input 
                     type="email"
                     id="email"
@@ -48,9 +59,22 @@ export default function Login() {
                         value: e.target.value,
                     })}
                 />
-                <Button value="Entrar" />
+                <Input
+                    type="password"
+                    id="password_confirmation"
+                    placeholder="Senha"
+                    value={form.password_confirmation}
+                    required
+                    pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_].*[\W_])[A-Za-z\d\W_]{8,50}$"
+
+                    onChange={(e) => handleChange({
+                        name: e.target.id,
+                        value: e.target.value,
+                    })}
+                />
+                <Button value="Cadastrar" />
             </form>
-            <Link to="signUp">Primeira vez? Cadastre-se!</Link>
+            <Link to="/">Já tem uma conta? Entre agora!</Link>
         </Container>
     );
 }
