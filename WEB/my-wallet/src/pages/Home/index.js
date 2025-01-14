@@ -1,96 +1,57 @@
-import { Container } from "./styles";
-import logo from "../icons/logOut.svg"
+import { Link } from "react-router-dom";
+
+import { Container, Header, NewTransactionButton, Transactions, TransactionTable } from "./styles";
+import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
+import { RiLogoutBoxRLine } from "react-icons/ri";
+import Transaction from "../../Components/Transaction";
+import Balance from "../../Components/Balance";
+import { useState } from "react";
+
 export default function Home() {
+    const [transactions, setTransactions] = useState([
+        {date:"01/04",description:"Salário",value:"R$10000,00",type:"income"},
+        {date:"07/04", description:"Almoço GutGut", value:"R$80,00", type:"expense"}, 
+        {date:"08/04", description:"Almoço Nelson", value:"R$10,00", type:"expense"}
+    ]);
+
     return (
         <Container>
-            <div class="topPage">
+            <Header>
                 <h1>Olá, Fulano</h1>
-                <img src="../" alt="logout icon" class="icon"/>
-            </div>
-            <div class="transactionTable">
-                <div class="transactions">
-                    <span class="transaction">
-                        <p class="date">01/03</p>
-                        <p class="description">Salário Meguel</p>
-                        <p class="income">R$10.000,00</p>
-                    </span>
-                    <span class="transaction">
-                        <p class="date">08/04</p>
-                        <p class="description">Almoço Nelson</p>
-                        <p class="expense">R$10,00</p>
-                    </span>
-                    <span class="transaction">
-                        <p class="date">04/04</p>
-                        <p class="description">Janta Meguel após campeonato de karatê</p>
-                        <p class="expense">R$4,00</p>
-                    </span>
-                    <span class="transaction">
-                        <p class="date">04/04</p>
-                        <p class="description">Janta Meguel após campeonato de karatê</p>
-                        <p class="expense">R$4,00</p>
-                    </span>
-                    <span class="transaction">
-                        <p class="date">04/04</p>
-                        <p class="description">Janta Meguel após campeonato de karatê</p>
-                        <p class="expense">R$4,00</p>
-                    </span>
-                    <span class="transaction">
-                        <p class="date">04/04</p>
-                        <p class="description">Janta Meguel após campeonato de karatê</p>
-                        <p class="expense">R$4,00</p>
-                    </span>
-                    <span class="transaction">
-                        <p class="date">04/04</p>
-                        <p class="description">Janta Meguel após campeonato de karatê</p>
-                        <p class="expense">R$4,00</p>
-                    </span>
-                    <span class="transaction">
-                        <p class="date">04/04</p>
-                        <p class="description">Janta Meguel após campeonato de karatê</p>
-                        <p class="expense">R$4,00</p>
-                    </span>
-                    <span class="transaction">
-                        <p class="date">04/04</p>
-                        <p class="description">Janta Meguel após campeonato de karatê</p>
-                        <p class="expense">R$4,00</p>
-                    </span>
-                    <span class="transaction">
-                        <p class="date">04/04</p>
-                        <p class="description">Janta Meguel após campeonato de karatê</p>
-                        <p class="expense">R$4,00</p>
-                    </span>
-                    <span class="transaction">
-                        <p class="date">04/04</p>
-                        <p class="description">Janta Meguel após campeonato de karatê</p>
-                        <p class="expense">R$4,00</p>
-                    </span>
-                    <span class="transaction">
-                        <p class="date">04/04</p>
-                        <p class="description">Janta Meguel após campeonato de karatê</p>
-                        <p class="expense">R$4,00</p>
-                    </span>
-                </div>
-            <div class="balance">
-                <span class="transaction">
-                    <p class="boldBalance">Saldo</p>
-                    <p class="income">R$9.986,00</p>
-                </span>
-            </div>
+                <RiLogoutBoxRLine />
+            </Header>
+            <TransactionTable>
+                {transactions.length === 0
+                    ? (<p class="emptyText">Não há registros de entrada ou saída</p>)
+                    : 
+                    <Transactions>
+                {transactions.map((transaction, index) =>(
+                    <Transaction
+                        date={transaction.date}
+                        description={transaction.description}
+                        value={transaction.value}
+                        type={transaction.type}
+                    />
+                ))}
+                    </Transactions>}
+                <Balance type="income" value="R$9.986,00" />
 
-            </div>
+            </TransactionTable>
+
             <div class="buttons">
-                <a href="newIncome.html">
-                    <div class="newTransactionButton">
-                        <div class="transactionIcon">+</div>
-                        <p>Nova<br/>Entrada</p>
-                    </div>
-                </a>
-                <a href="newExpense.html">
-                    <div class="newTransactionButton">
-                        <div class="transactionIcon">-</div>
-                        <p>Nova<br/>saída</p>
-                    </div>
-                </a>
+                <Link to="/transaction/novo?type=income">
+                    <NewTransactionButton>
+                        <AiOutlinePlusCircle />
+                        <p>Nova entrada</p>
+                    </NewTransactionButton>
+                </Link>
+
+                <Link to="/transaction/novo?type=expense">
+                    <NewTransactionButton>
+                        <AiOutlineMinusCircle />
+                        <p>Nova saída</p>
+                    </NewTransactionButton>
+                </Link>
             </div>
         </Container>
     )

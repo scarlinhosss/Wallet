@@ -65,7 +65,7 @@ export default function SignUp() {
                     placeholder="Senha"
                     value={form.password_confirmation}
                     required
-                    pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_].*[\W_])[A-Za-z\d\W_]{8,50}$"
+                    pattern={form.password}
 
                     onChange={(e) => handleChange({
                         name: e.target.id,

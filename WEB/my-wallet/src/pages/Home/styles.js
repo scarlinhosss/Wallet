@@ -6,18 +6,37 @@ export const Container = styled.div `
     display: flex;
     padding: 20px; 
     flex-direction: column;
+
     h1 {
         color: white;
         font-size: 26px;
     };
-    .topPage {
-    height: 50px;
-    display: flex;
-    max-width: 100%;
-    flex-direction: horizontal;
-    justify-content: space-between;
+    
 
-    .transactionTable {
+    .buttons {
+        display: flex;
+        width: 100%;
+        margin-top: 13px; 
+
+        a {
+            width: 100%;
+            text-decoration: none;
+        }
+
+        a:first-child {
+            margin-right: 7.5px;
+        }
+
+        a:last-child {
+            margin-left: 7.5px;
+        }
+
+        p {
+            margin: 0;
+        }
+    }
+`
+export const TransactionTable = styled.div`
     display: flex;
     position: relative;
     flex-direction: column;
@@ -26,115 +45,65 @@ export const Container = styled.div `
     justify-content: space-between;
     align-items: start;
     background-color: white;
-    height: calc(100% - 177px); /*ao finalizar a página, usar calc*/
+    height: calc(100% - 177px);
     border-radius: 5px;
     text-align: center;
     color:rgb(100, 98, 98);
-
     .emptyText {
         width: 50%
     }
-    }
+`;
 
-    .transaction {
-        width: 100%;
+export const NewTransactionButton = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 114px;
+    background-color: #A328D6; 
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+
+    p {
         display: flex;
-        justify-content: space-between;
-        margin-bottom: 23px;
-        align-items: center;
-    }
-
-    .transactions {
-        width: 100%;
-        height: calc(100% - 40px);
-        overflow: auto;
-    }
-
-    .balance {
-        height: 20px;
-        width: 100%;
-    }
-
-    .boldBalance {
-        font-weight: 700;
         font-size: 17px;
-        color: black;
-    }
-    .description {
-    width: 100%;
-    text-align: start;
-    padding: 0 10px
+        font-weight: 700;
+        justify-content: start;
+        max-width: 70px;
     }
 
-    .date {
-        color: #C6C6C6;
-    }
-
-    .income {
-        color: #03AC00; 
-    }
-
-    .expense {
-        color: #C70000;
-    }
-
-    .buttons {
-        display: flex;
-        width: 100%;
-        margin-top: 13px; 
-        a {
-            width: 100%;
-        }
-        a:first-child {
-            margin-right: 7.5px;
-        }
-        a:last-child {
-            margin-left: 7.5px;
-        }
-    }
-
-    .newTransactionButton {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 114px;
-        background-color: #A328D6; 
-        color: white;
-        border-radius: 5px;
-        padding: 10px;
-
-        h1 {
-            display: flex;
-            font-size: 17px;
-            justify-content:start;
-        }
-    }
-
-    .transactionIcon {
-        display:flex;
+    svg {
         height: 25px;
         width: 25px;
-        font-size: 35px;
         color: white;
-        justify-content: center;
-        align-items: center;
-        line-height: 0;
-        border: 2px solid white;
-        border-radius: 50%;
+    }
+`;
+
+export const Header = styled.div`
+    height: 50px;
+    display: flex;
+    max-width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+
+    svg {
+        height: 25px;
+        width:25px;
+        color: white;
     }
 
-    .icon {
-        cursor:pointer;
+    h1 {
+        margin: 0;
+        color: white;
     }
 
-    input::placeholder {
-        color:rgb(100, 98, 98);
+    svg {
+        cursor: pointer;
     }
+`;
 
-    a:link {
-        text-decoration: none;
-    }
-
-
-}
-`
+export const Transactions = styled.div`
+    width: 100%;
+    height: calc(100% - 40px);
+    overflow: auto;
+`;
