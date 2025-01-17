@@ -50,7 +50,9 @@ export const TransactionTable = styled.div`
     text-align: center;
     color:rgb(100, 98, 98);
     .emptyText {
-        width: 50%
+        width: 50%;
+        align-self: center;
+        margin: auto 0;
     }
 `;
 

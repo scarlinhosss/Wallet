@@ -1,32 +1,72 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Container, Header, NewTransactionButton, Transactions, TransactionTable } from "./styles";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import Transaction from "../../Components/Transaction";
 import Balance from "../../Components/Balance";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import { getTransactions } from "../../services/transaction-service";
+import UserContext from "../../contexts/UserContext";
+import { logout } from "../../services/session-api";
+import { saveOnLocalStorage } from "../../utils/context-utils";
 
 export default function Home() {
-    const [transactions, setTransactions] = useState([
-        {date:"01/04",description:"Salário",value:"R$10000,00",type:"income"},
-        {date:"07/04", description:"Almoço GutGut", value:"R$80,00", type:"expense"}, 
-        {date:"08/04", description:"Almoço Nelson", value:"R$10,00", type:"expense"}
-    ]);
+    const navigate = useNavigate();
+    const { userData, setUserData } = useContext(UserContext);
+    const [transactions, setTransactions] = useState([]);
+    const [balance, setBalance] = useState("");
+
+    useEffect(() => {
+       loadTransactions();
+    }, []);
+
+    async function loadTransactions() {
+        try {
+            const response = await getTransactions(userData.userId, userData.token);
+
+            if(response) {
+                setTransactions(response.transactions);
+                setBalance(response.balance);
+            }
+        } catch(error) {
+            alert(error.response.data);
+        }
+    }
+
+    async function handleLogout() {
+        const body = {
+            id: userData.sessionId,
+            email: userData.email,
+            token: userData.token,
+        };
+
+        try {
+            await logout(body, userData.token);
+            
+            setUserData({});
+            saveOnLocalStorage("userData", {});
+
+            navigate("/");
+        } catch(error) {
+            alert(error.response.data);
+        };
+    }
 
     return (
         <Container>
             <Header>
-                <h1>Olá, Fulano</h1>
-                <RiLogoutBoxRLine />
+                <h1>{`Olá, ${userData.name}`}</h1>
+                <RiLogoutBoxRLine onClick={handleLogout} />
             </Header>
             <TransactionTable>
                 {transactions.length === 0
-                    ? (<p class="emptyText">Não há registros de entrada ou saída</p>)
+                    ? (<p className="emptyText">Não há registros de entrada ou saída</p>)
                     : 
                     <Transactions>
                 {transactions.map((transaction, index) =>(
                     <Transaction
+                        key={index}
                         date={transaction.date}
                         description={transaction.description}
                         value={transaction.value}
@@ -34,11 +74,11 @@ export default function Home() {
                     />
                 ))}
                     </Transactions>}
-                <Balance type="income" value="R$9.986,00" />
+                <Balance type="income" value={`R$${balance}`} />
 
             </TransactionTable>
 
-            <div class="buttons">
+            <div className="buttons">
                 <Link to="/transaction/novo?type=income">
                     <NewTransactionButton>
                         <AiOutlinePlusCircle />

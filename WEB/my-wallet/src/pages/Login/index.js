@@ -1,23 +1,38 @@
 
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import Button from "../../Components/Button";
 import Input from "../../Components/Input";
 import { Container } from "./styles";
+import { login } from "../../services/session-api";
+import UserContext from "../../contexts/UserContext";
+import { saveOnLocalStorage } from "../../utils/context-utils";
 
 export default function Login() {
+    const { setUserData } = useContext(UserContext);
+    const navigate = useNavigate();
     const [form, setForm] = useState({ email: "", password: "" });
 
     function handleChange({ name, value }) {
         setForm({ ...form, [name]: value });
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
 
         const body = { ...form, id: 0 };
-        console.log(body);
+
+        try {
+            const response = await login(body);
+
+            setUserData(response);
+            saveOnLocalStorage("userData", response);
+
+            navigate("home");
+        } catch(error) {
+            alert(error.response.data);
+        };
     }
 
     return (

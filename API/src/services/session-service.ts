@@ -14,11 +14,19 @@ async function upsertSession(data: SessionParams) {
 
     if(!user) throw notFoundError();
 
-    await validatePasswordOrFail(data.password, user?.hash_password);
+    if(!data.id) await validatePasswordOrFail(data.password, user?.hash_password);
     
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET || "");
+    const token = data.id ? data.token : jwt.sign({ userId: user.id }, process.env.JWT_SECRET || "");
 
-    await sessionRepository.upsertSession({ ...data, token }, user.id);
+    const session = await sessionRepository.upsertSession({ ...data, token }, user.id);
+
+    return {
+        userId: user.id,
+        sessionId: session.id,
+        token: session.token,
+        name: user.name,
+        email: user.email,
+    };
 }
 
 async function validatePasswordOrFail(password: string, hash_password: string) {

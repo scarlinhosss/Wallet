@@ -1,7 +1,7 @@
 import { prisma } from "../config"
-import { transactionParams } from "../protocols/transaction-protocols"
+import { TransactionParams } from "../protocols/transaction-protocols"
 
-async function createTransaction(data: transactionParams) {
+async function createTransaction(data: TransactionParams) {
     return prisma.transaction.create({
         data,
     })
@@ -15,7 +15,7 @@ async function getTransactionById(id: number) {
     });
 }
 
-async function getUserTransaction(userId: number) {
+async function getUserTransactions(userId: number) {
     return prisma.transaction.findMany({
         where: {
             userId: userId,
@@ -26,7 +26,7 @@ async function getUserTransaction(userId: number) {
 const transactionRepository = {
     createTransaction,
     getTransactionById,
-    getUserTransaction
+    getUserTransactions
 }
 
 export default transactionRepository;

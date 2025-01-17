@@ -8,12 +8,13 @@ import dotenv from "dotenv";
 export async function upsertSession(req: Request, res: Response) {
     const { id, email, password } = req.body as SessionParams;
 
-    if ((!id && id !== 0 || !email || isNaN(id))) 
+    if ((!id && id !== 0 || !email || isNaN(id)) || (!id && !password)) 
         return res.status(httpStatus.BAD_REQUEST).send("Parâmetros não encontrados ou incorretos");
 
     try {
-        await sessionServices.upsertSession({ id, email, password });
-        res.status(httpStatus.OK).send(id ? "Sessão encerrada com sucesso" : "Sessão criada com sucesso");
+        const response = await sessionServices.upsertSession(req.body);
+
+        res.status(httpStatus.OK).send(response);
     } catch (error: any) {
         console.log(error);
         if (error.name === "NotFoundError")

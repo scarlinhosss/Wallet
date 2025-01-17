@@ -19,9 +19,18 @@ import { userParams } from "../protocols";
     });
  }
 
+ function findUserById(id: number) {
+    return prisma.user.findUnique({
+        where: {
+            id,
+        },
+    });
+ }
+
 const userRepository = {
     createUser,
     findUseryByEmail,
+    findUserById,
 };
 
 export default userRepository;

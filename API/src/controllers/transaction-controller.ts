@@ -1,12 +1,12 @@
 import { Response, Request } from "express";
 import httpStatus from "http-status";
-import transactionServices, { calculateBalance } from "../services/transaction-service";
-import { transactionParams } from "../protocols";
+import transactionServices from "../services/transaction-service";
+import { TransactionParams } from "../protocols";
 import { errorMessages } from "../utils/error-utils";
 import { AuthenticatedRequest } from "../middlewares/authenticate-token";
 
 export async function createTransaction(req: Request, res: Response) {
-    const { id,description, value, type, userId } = req.body as transactionParams;
+    const { id,description, value, type, userId } = req.body as TransactionParams;
 
     try {
         await transactionServices.createTransaction({ id, description, value, type, userId });
@@ -32,10 +32,9 @@ export async function getUserTransaction(req: AuthenticatedRequest, res: Respons
     if(!userId && !isNaN(userId)) return res.status(httpStatus.BAD_REQUEST).send(errorMessages.missingValues);
 
     try {
-        //const transactions = await transactionServices.getUserTransaction(userId);
-        const result = await calculateBalance(userId)
-        //return res.status(httpStatus.OK).send(transactions);
-        return res.status(httpStatus.OK).send(result);
+        const response = await transactionServices.getUserTransactions(userId);
+
+        return res.status(httpStatus.OK).send(response);
     } catch (error) {
         return res.status(httpStatus.INTERNAL_SERVER_ERROR).send(errorMessages.generic);
     }

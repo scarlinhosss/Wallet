@@ -1,6 +1,6 @@
 import { EntryType } from "@prisma/client"
 
-export type transactionParams = { 
+export type TransactionParams = { 
     id: number,
     description: string,
     value: number,
@@ -8,10 +8,10 @@ export type transactionParams = {
     userId: number,
 }
 
-export type transactionResponse = { 
+export type TransactionResponse = { 
     id: number,
     description: string,
     value: string,
     type: EntryType,
-    userId: number,
+    date: Date,
 }
