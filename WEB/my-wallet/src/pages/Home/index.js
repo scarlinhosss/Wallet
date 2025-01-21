@@ -19,6 +19,7 @@ export default function Home() {
 
     useEffect(() => {
        loadTransactions();
+       // eslint-disable-next-line  
     }, []);
 
     async function loadTransactions() {

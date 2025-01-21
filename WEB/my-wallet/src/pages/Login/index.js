@@ -8,6 +8,7 @@ import { Container } from "./styles";
 import { login } from "../../services/session-api";
 import UserContext from "../../contexts/UserContext";
 import { saveOnLocalStorage } from "../../utils/context-utils";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Login() {
     const { setUserData } = useContext(UserContext);
@@ -31,9 +32,21 @@ export default function Login() {
 
             navigate("home");
         } catch(error) {
-            alert(error.response.data);
+            alert(error.response);
         };
     }
+
+    toast('🦄 Wow so easy!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+        });
 
     return (
         <Container>
@@ -64,6 +77,7 @@ export default function Login() {
                     })}
                 />
                 <Button value="Entrar" />
+                <ToastContainer />
             </form>
             <Link to="signUp">Primeira vez? Cadastre-se!</Link>
         </Container>
