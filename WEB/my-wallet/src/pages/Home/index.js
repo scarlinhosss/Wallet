@@ -10,6 +10,7 @@ import { getTransactions } from "../../services/transaction-service";
 import UserContext from "../../contexts/UserContext";
 import { logout } from "../../services/session-api";
 import { saveOnLocalStorage } from "../../utils/context-utils";
+import { formatToBRL } from "../../utils/valueHandler-utils";
 
 export default function Home() {
     const navigate = useNavigate();
@@ -70,12 +71,12 @@ export default function Home() {
                         key={index}
                         date={transaction.date}
                         description={transaction.description}
-                        value={transaction.value}
+                        value={formatToBRL(transaction.value)}
                         type={transaction.type}
                     />
                 ))}
                     </Transactions>}
-                <Balance type="income" value={`R$${balance}`} />
+                <Balance type="income" value={`R$${formatToBRL(balance)}`} />
 
             </TransactionTable>
 

@@ -1,10 +1,12 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom"; 
+import { Link, Navigate } from "react-router-dom"; 
 
 import Button from "../../Components/Button";
 import Input from "../../Components/Input";
 import { Container } from "./styles";
+import { toast } from "react-toastify";
+import { toastOptions } from "../../utils/toastOptions-utils";
 
 export default function SignUp() {
     const [form, setForm] = useState({name: "", email: "", password: "", password_confirmation: ""  });
@@ -13,11 +15,19 @@ export default function SignUp() {
         setForm({ ...form, [name]: value });
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
 
         const body = { ...form, id: 0 };
         console.log(body);
+        try {
+            const user = await SignUp(form);
+            toast.success("Login realizado com sucesso", toastOptions)
+
+            Navigate(-1);
+        } catch(error) {
+            toast.error(`${error.response.data}`, toastOptions);
+        };
     }
 
     return (

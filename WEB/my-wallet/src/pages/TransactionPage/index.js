@@ -5,6 +5,7 @@ import { useLocation, useParams } from "react-router-dom";
 import Button from "../../Components/Button";
 import Input from "../../Components/Input";
 import { Container } from "./styles";
+import { formatToBRL } from "../../utils/valueHandler-utils";
 
 export default function TransactionPage() {
     const { transactionId } = useParams();
@@ -33,7 +34,7 @@ export default function TransactionPage() {
                     type="text"
                     id="value"
                     placeholder="Valor"
-                    value={form.value}
+                    value={formatToBRL(form.value)}
                     required
                     onChange={(e) => handleChange({
                         name: e.target.id,

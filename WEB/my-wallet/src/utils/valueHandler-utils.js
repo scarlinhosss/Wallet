@@ -1,14 +1,12 @@
 export function formatToBRL(value) {
-    value = value.replace(/[^\d]/g, "");
+    if (!value) return value;
 
-    value = (parseInt(value, 10) / 100).toFixed(2);
+    let newValue = value.replace(/[^\d]/g, "");
 
-    let [integer, decimal] = value.split(".");
+    newValue = (parseInt(newValue, 10) / 100).toFixed(2);
+
+    let [integer, decimal] = newValue.split(".");
     integer = integer.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     
     return `${integer},${decimal}`;
 }
-
-document.getElementById("valor").addEventListener("input", function (e) {
-    e.target.value = formatToBRL(e.target.value);
-});

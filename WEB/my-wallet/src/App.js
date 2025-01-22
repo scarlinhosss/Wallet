@@ -5,28 +5,28 @@ import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import TransactionPage from "./pages/TransactionPage";
 import { UserProvider } from "./contexts/UserContext";
-import { ToastContainer, toast } from 'react-toastify';
+import { Bounce, ToastContainer } from 'react-toastify';
 
 function App() {
 
-  <ToastContainer
-      position="bottom-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick={false}
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="light"
-      transition={Bounce}
-    />
   
-  return (
-  
+  return (    
     <UserProvider>
       <div className="App">
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Bounce}
+      />
+
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />}></Route>
