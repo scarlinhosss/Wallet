@@ -19,7 +19,7 @@ export default function Home() {
     const { userData, setUserData } = useContext(UserContext);
     const [transactions, setTransactions] = useState([]);
     const [balance, setBalance] = useState("");
-
+ 
     useEffect(() => {
        loadTransactions();
        // eslint-disable-next-line  
@@ -78,7 +78,7 @@ export default function Home() {
                     />
                 ))}
                     </Transactions>}
-                <Balance type="income" value={formatToBRL(balance)} />
+                <Balance type={balance > 0 ? "income" : "expense"} value={formatToBRL(balance, balance > 0 ? "income" : "expense")} />
 
             </TransactionTable>
 

@@ -8,7 +8,7 @@ export function transactionValueHandle(transactions: Transaction[]): Transaction
         description: transaction.description,
         date: transaction.createdAt,
         type: transaction.type,
-        value: (transaction.value / 100).toFixed(2).replace(".", ","),
+        value: (transaction.value / 100),
     }));
 }
 
@@ -17,7 +17,7 @@ export async function calculateBalance(transactions: Transaction[]) {
         return transaction.type === "income"
             ? total + transaction.value
             : total - transaction.value;
-    }, 0) / 100).toFixed(2).replace(".", ",");
+    }, 0) / 100);
 
     const result = {
         transactions: transactionValueHandle(transactions),

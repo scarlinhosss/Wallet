@@ -19,7 +19,7 @@ export default function TransactionPage() {
     const type = searchParams.get("type");
     const newTransaction = isNaN(transactionId);
     const [form, setForm] = useState({ value: "", description: "" });
-
+    /* console.log(form.value); */
     function handleChange({ name, value }) {
 
         setForm({ ...form, [name]: value });
@@ -32,7 +32,7 @@ export default function TransactionPage() {
         
         const body = {
             ...form,
-            value: Number(form.value.replace("R$", "").replace(",", ".")),
+            value: Number(form.value.replace("R$", "").replace(".", "").replace(",", ".")),
             id: newTransaction ? 0 : transactionId,
             type,
             userId: userData.userId,

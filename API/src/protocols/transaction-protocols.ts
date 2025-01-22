@@ -11,7 +11,7 @@ export type TransactionParams = {
 export type TransactionResponse = { 
     id: number,
     description: string,
-    value: string,
+    value: number,
     type: EntryType,
     date: Date,
 }

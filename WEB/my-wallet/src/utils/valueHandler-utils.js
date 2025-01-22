@@ -1,12 +1,16 @@
-export function formatToBRL(value) {
-    if (!value) return value;
-
-    let newValue = value.replace(/[^\d]/g, "");
+export function formatToBRL(value, type) {
+    if (!value) return value; 
+    
+    let newValue = typeof value === "number"
+        ? value.toFixed(2).replace(/[^\d]/g, "")
+        : value.replace(/[^\d]/g, "");
+    
+    if (!newValue) return "";
 
     newValue = (parseInt(newValue, 10) / 100).toFixed(2);
 
     let [integer, decimal] = newValue.split(".");
     integer = integer.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     
-    return `R$${integer},${decimal}`;
+    return `R$${type === "expense" ? "-" : ""}${integer},${decimal}`;
 }
