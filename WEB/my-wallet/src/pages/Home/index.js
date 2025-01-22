@@ -11,6 +11,8 @@ import UserContext from "../../contexts/UserContext";
 import { logout } from "../../services/session-api";
 import { saveOnLocalStorage } from "../../utils/context-utils";
 import { formatToBRL } from "../../utils/valueHandler-utils";
+import { toastOptions } from "../../utils/toastOptions-utils";
+import { toast } from "react-toastify";
 
 export default function Home() {
     const navigate = useNavigate();
@@ -32,7 +34,7 @@ export default function Home() {
                 setBalance(response.balance);
             }
         } catch(error) {
-            alert(error.response.data);
+            toast.error(`${error.response.data}`, toastOptions);
         }
     }
 
@@ -51,7 +53,7 @@ export default function Home() {
 
             navigate("/");
         } catch(error) {
-            alert(error.response.data);
+            toast.error(`${error.response.data}`, toastOptions);
         };
     }
 
@@ -76,7 +78,7 @@ export default function Home() {
                     />
                 ))}
                     </Transactions>}
-                <Balance type="income" value={`R$${formatToBRL(balance)}`} />
+                <Balance type="income" value={formatToBRL(balance)} />
 
             </TransactionTable>
 

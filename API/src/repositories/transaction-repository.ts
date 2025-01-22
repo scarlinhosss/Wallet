@@ -2,8 +2,21 @@ import { prisma } from "../config"
 import { TransactionParams } from "../protocols/transaction-protocols"
 
 async function createTransaction(data: TransactionParams) {
-    return prisma.transaction.create({
-        data,
+    await prisma.transaction.upsert({
+        where: {
+            id: data.id,
+        },
+        create: {
+            description: data.description,
+            value: data.value,
+            type: data.type,
+            userId: data.userId, 
+        },
+        update: {
+            description: data.description,
+            value: data.value,
+            updatedAt: new Date(),
+        }
     })
 }
 

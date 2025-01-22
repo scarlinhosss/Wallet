@@ -6,7 +6,7 @@ import { errorMessages } from "../utils/error-utils";
 import { AuthenticatedRequest } from "../middlewares/authenticate-token";
 
 export async function createTransaction(req: Request, res: Response) {
-    const { id,description, value, type, userId } = req.body as TransactionParams;
+    const { id, description, value, type, userId } = req.body as TransactionParams;
 
     try {
         await transactionServices.createTransaction({ id, description, value, type, userId });

@@ -6,7 +6,7 @@ export default function Transaction({ date, description, value, type }) {
         <Container type={type}>
             <p className="date">{dayjs(date).format("DD/MM")}</p>
             <p className="description">{description}</p>
-            <p>{`R$${value}`}</p>
+            <p>{value}</p>
         </Container>
     );
 }

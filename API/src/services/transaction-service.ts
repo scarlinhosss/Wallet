@@ -28,7 +28,7 @@ export async function calculateBalance(transactions: Transaction[]) {
 }
 
 async function createTransaction(data: TransactionParams) {
-    return transactionRepository.createTransaction({ ...data, value: data.value * 100 })
+    await transactionRepository.createTransaction({ ...data, value: data.value * 100 })
 }
 
 async function getTransactionById(id: number) {

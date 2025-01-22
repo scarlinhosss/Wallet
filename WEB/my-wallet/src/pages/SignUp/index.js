@@ -1,14 +1,16 @@
 
 import { useState } from "react";
-import { Link, Navigate } from "react-router-dom"; 
+import { Link, useNavigate } from "react-router-dom"; 
 
 import Button from "../../Components/Button";
 import Input from "../../Components/Input";
 import { Container } from "./styles";
 import { toast } from "react-toastify";
 import { toastOptions } from "../../utils/toastOptions-utils";
+import { signUp } from "../../services/session-api";
 
 export default function SignUp() {
+    const navigate = useNavigate();
     const [form, setForm] = useState({name: "", email: "", password: "", password_confirmation: ""  });
 
     function handleChange({ name, value }) {
@@ -18,13 +20,11 @@ export default function SignUp() {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        const body = { ...form, id: 0 };
-        console.log(body);
         try {
-            const user = await SignUp(form);
-            toast.success("Login realizado com sucesso", toastOptions)
+            await signUp(form);
+            toast.success("Cadastro realizado com sucesso", toastOptions)
 
-            Navigate(-1);
+            navigate(-1);
         } catch(error) {
             toast.error(`${error.response.data}`, toastOptions);
         };

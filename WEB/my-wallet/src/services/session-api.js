@@ -6,6 +6,12 @@ export async function login(body) {
     return response.data;
 }
 
+export async function signUp(body) {
+    const response = await api.post("/user", body);
+
+    return response.data;
+}
+
 export async function logout(body, token) {
     const response = await api.post("/session/logout", body, {
         headers: {

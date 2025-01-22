@@ -8,5 +8,5 @@ export function formatToBRL(value) {
     let [integer, decimal] = newValue.split(".");
     integer = integer.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     
-    return `${integer},${decimal}`;
+    return `R$${integer},${decimal}`;
 }
