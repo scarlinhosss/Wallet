@@ -39,3 +39,14 @@ export async function getUserTransaction(req: AuthenticatedRequest, res: Respons
         return res.status(httpStatus.INTERNAL_SERVER_ERROR).send(errorMessages.generic);
     }
 }
+
+export async function deleteTransaction(req: AuthenticatedRequest, res: Response) {
+    const id = Number(req.params.id);
+    try {
+        await transactionServices.deleteTransaction(id);
+        res.status(httpStatus.OK).send("Transação deletada com sucessos")
+    } catch(error: any) {
+        console.log(error);
+        return res.status(httpStatus.INTERNAL_SERVER_ERROR).send(errorMessages.generic)
+    }
+}

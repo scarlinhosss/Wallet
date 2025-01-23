@@ -6,8 +6,6 @@ export const Container = styled.div`
     flex-direction: column;
     height: 100vh;
     padding: 25px 24px;
-    justify-content: start;
-    align-items: start;
     
     h1 {
         color: white;
@@ -18,4 +16,18 @@ export const Container = styled.div`
     form {
         padding-top: 24px;
     }
+
+    svg {
+        height: 25px;
+        width: 25px;
+        cursor: pointer;
+        transform: rotate(45deg);
+        color: white;
+    }
+`
+
+export const Header = styled.div `
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
 `

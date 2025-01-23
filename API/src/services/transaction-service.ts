@@ -43,11 +43,16 @@ async function getUserTransactions(userId: number) {
     return result;
 }
 
+async function deleteTransaction(id: number) {
+    await transactionRepository.deleteTransaction(id);
+}
+
 
 const transactionServices = {
     createTransaction,
     getTransactionById,
     getUserTransactions,
+    deleteTransaction,
 }
 
 export default transactionServices;

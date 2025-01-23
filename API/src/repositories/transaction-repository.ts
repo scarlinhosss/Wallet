@@ -31,15 +31,24 @@ async function getTransactionById(id: number) {
 async function getUserTransactions(userId: number) {
     return prisma.transaction.findMany({
         where: {
-            userId: userId,
+            userId,
         },
+    })
+}
+
+async function deleteTransaction(id: number) {
+    return prisma.transaction.delete({
+        where: {
+            id,
+        }
     })
 }
 
 const transactionRepository = {
     createTransaction,
     getTransactionById,
-    getUserTransactions
+    getUserTransactions,
+    deleteTransaction,
 }
 
 export default transactionRepository;

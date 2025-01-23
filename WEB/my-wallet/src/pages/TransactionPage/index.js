@@ -1,16 +1,17 @@
 
 import { useContext ,useState } from "react";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useNavigate, useLocation, useParams, Link } from "react-router-dom";
 
 import Button from "../../Components/Button";
 import Input from "../../Components/Input";
-import { Container } from "./styles";
+import { Container, Header } from "./styles";
 import { formatToBRL } from "../../utils/valueHandler-utils";
 /* import { postTransactions } from "../../services/transaction-service"; */
 import { toast } from "react-toastify";
 import { toastOptions } from "../../utils/toastOptions-utils";
 import UserContext from "../../contexts/UserContext"
 import { postTransactions } from "../../services/transaction-service";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 
 export default function TransactionPage() {
     const { userData } = useContext(UserContext);
@@ -47,12 +48,16 @@ export default function TransactionPage() {
             toast.error(`${error.response.data}`, toastOptions);
         };
     }
-
-        
+       
 
     return (
         <Container>
-            <h1>{`${newTransaction ? "Nova" : "Editar"} ${type === "income" ? "entrada" : "saída"}`}</h1>
+            <Header>
+                <h1>{`${newTransaction ? "Nova" : "Editar"} ${type === "income" ? "entrada" : "saída"}`}</h1>
+                <Link to="/home">
+                    <AiOutlinePlusCircle />
+                </Link>
+            </Header>
             <form onSubmit={handleSubmit}>
                 <Input 
                     type="text"

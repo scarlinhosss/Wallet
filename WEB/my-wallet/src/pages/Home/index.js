@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Container, Header, NewTransactionButton, Transactions, TransactionTable } from "./styles";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 import { RiLogoutBoxRLine } from "react-icons/ri";
+import { FaRegEdit } from "react-icons/fa";
 import Transaction from "../../Components/Transaction";
 import Balance from "../../Components/Balance";
 import { useState, useEffect, useContext } from "react";
@@ -52,6 +53,7 @@ export default function Home() {
             saveOnLocalStorage("userData", {});
 
             navigate("/");
+            toast.success("Logout realizado com sucesso", toastOptions)
         } catch(error) {
             toast.error(`${error.response.data}`, toastOptions);
         };
@@ -61,6 +63,7 @@ export default function Home() {
         <Container>
             <Header>
                 <h1>{`Olá, ${userData.name}`}</h1>
+                <FaRegEdit />
                 <RiLogoutBoxRLine onClick={handleLogout} />
             </Header>
             <TransactionTable>

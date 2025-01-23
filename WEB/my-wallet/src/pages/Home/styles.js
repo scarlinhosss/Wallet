@@ -92,15 +92,12 @@ export const Header = styled.div`
         height: 25px;
         width:25px;
         color: white;
+        cursor: pointer;
     }
 
     h1 {
         margin: 0;
         color: white;
-    }
-
-    svg {
-        cursor: pointer;
     }
 `;
 
