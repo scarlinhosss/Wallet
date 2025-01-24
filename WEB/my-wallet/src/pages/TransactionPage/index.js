@@ -1,5 +1,5 @@
 
-import { useContext ,useState } from "react";
+import { useContext ,useEffect,useState } from "react";
 import { useNavigate, useLocation, useParams, Link } from "react-router-dom";
 
 import Button from "../../Components/Button";
@@ -10,23 +10,41 @@ import { formatToBRL } from "../../utils/valueHandler-utils";
 import { toast } from "react-toastify";
 import { toastOptions } from "../../utils/toastOptions-utils";
 import UserContext from "../../contexts/UserContext"
-import { postTransactions } from "../../services/transaction-service";
+import { getTransactionById, postTransactions } from "../../services/transaction-service";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
 export default function TransactionPage() {
     const { userData } = useContext(UserContext);
     const { transactionId } = useParams();
+    const navigate = useNavigate();
     const searchParams = new URLSearchParams(useLocation().search);
     const type = searchParams.get("type");
     const newTransaction = isNaN(transactionId);
     const [form, setForm] = useState({ value: "", description: "" });
-    /* console.log(form.value); */
+
+    useEffect(() => {
+        loadTransaction();
+    }, []);
+
     function handleChange({ name, value }) {
 
         setForm({ ...form, [name]: value });
     }
 
-    const navigate = useNavigate();
+    async function loadTransaction() {
+        if (newTransaction) return;
+
+        try {
+            const response = await getTransactionById(transactionId, userData.token);
+            console.log(response);
+            if(response) {
+                setForm({ value: response.value, description: response.description });
+            }
+
+        } catch(error) {
+            toast(`${error.response.data}`, toastOptions);
+        }
+    }
 
     async function handleSubmit(e) {
         e.preventDefault();

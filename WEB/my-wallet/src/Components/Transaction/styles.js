@@ -6,6 +6,7 @@ export const Container = styled.span`
     justify-content: space-between;
     margin-bottom: 20px;
     align-items: center;
+    cursor: ${({ editing }) => editing ? "pointer" : "default"};
 
     p {
         margin: 0;

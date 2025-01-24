@@ -10,6 +10,15 @@ export async function getTransactions(userId, token) {
     return response.data;
 }
 
+export async function getTransactionById(id, token) {
+    const response = await api.get(`/transaction/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    return response.data;
+}
+
 export async function postTransactions(body, token) {
     const response = await api.post("/transaction", body, {
         headers: {
