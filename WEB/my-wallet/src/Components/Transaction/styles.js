@@ -21,7 +21,17 @@ export const Container = styled.span`
         padding: 0 10px
     }
 
-    p:last-child {
+    .value {
         color: ${({ type }) => type === "income" ? "#03AC00" : "#C70000"};
-    }  
+    }
+
+    svg {
+        height: 15px;
+        width: 15px;
+        min-height: 15px;
+        min-width: 15px;
+        margin-left: 5px;
+        color: black;
+        cursor: pointer;
+    }
 `;

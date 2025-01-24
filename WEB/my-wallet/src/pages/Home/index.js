@@ -20,7 +20,8 @@ export default function Home() {
     const { userData, setUserData } = useContext(UserContext);
     const [transactions, setTransactions] = useState([]);
     const [balance, setBalance] = useState("");
- 
+    const [editing, setEditing] = useState(false);
+
     useEffect(() => {
        loadTransactions();
        // eslint-disable-next-line  
@@ -63,8 +64,10 @@ export default function Home() {
         <Container>
             <Header>
                 <h1>{`Olá, ${userData.name}`}</h1>
-                <FaRegEdit />
-                <RiLogoutBoxRLine onClick={handleLogout} />
+                <span>
+                    <FaRegEdit onClick={() => setEditing(!editing)}/>
+                    <RiLogoutBoxRLine onClick={handleLogout} />
+                </span>
             </Header>
             <TransactionTable>
                 {transactions.length === 0
@@ -74,10 +77,13 @@ export default function Home() {
                 {transactions.map((transaction, index) =>(
                     <Transaction
                         key={index}
+                        id={transaction.id}
                         date={transaction.date}
                         description={transaction.description}
                         value={formatToBRL(transaction.value)}
                         type={transaction.type}
+                        loadTransactions={loadTransactions}
+                        editing={editing}
                     />
                 ))}
                     </Transactions>}

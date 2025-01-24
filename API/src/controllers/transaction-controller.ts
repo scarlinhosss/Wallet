@@ -42,6 +42,9 @@ export async function getUserTransaction(req: AuthenticatedRequest, res: Respons
 
 export async function deleteTransaction(req: AuthenticatedRequest, res: Response) {
     const id = Number(req.params.id);
+
+    if (!id || isNaN(id)) return res.status(httpStatus.BAD_REQUEST).send(errorMessages.missingValues);
+
     try {
         await transactionServices.deleteTransaction(id);
         res.status(httpStatus.OK).send("Transação deletada com sucessos")

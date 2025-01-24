@@ -19,3 +19,13 @@ export async function postTransactions(body, token) {
 
     return response.data;
 }
+
+export async function deleteTransaction(id, token) {
+    const response = await api.delete(`/transaction/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    return response.data;
+}

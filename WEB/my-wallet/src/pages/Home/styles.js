@@ -95,6 +95,10 @@ export const Header = styled.div`
         cursor: pointer;
     }
 
+    svg:first-child {
+        margin-right: 10px;
+    }
+
     h1 {
         margin: 0;
         color: white;
