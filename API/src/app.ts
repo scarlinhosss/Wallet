@@ -9,6 +9,8 @@ loadEnv();
 
 const app = express();
 
+const port = process.env.PORT || 4000;
+
 app
   .use(cors())
   .use(express.json())
