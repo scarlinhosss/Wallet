@@ -1,0 +1,2 @@
+1 - fix the value placeholder on home-transactions
+2 - fix the delete pop-up styles and responsivity
