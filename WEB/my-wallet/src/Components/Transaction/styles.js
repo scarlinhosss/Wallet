@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 export const Container = styled.span`
+    position: relative;
     width: 100%;
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
     align-items: center;
+    z-index: 0;
     cursor: ${({ editing }) => editing ? "pointer" : "default"};
 
     p {
@@ -27,6 +29,7 @@ export const Container = styled.span`
     }
 
     svg {
+        position: relative;
         height: 15px;
         width: 15px;
         min-height: 15px;
@@ -34,5 +37,6 @@ export const Container = styled.span`
         margin-left: 5px;
         color: black;
         cursor: pointer;
+        z-index: 1;
     }
 `;

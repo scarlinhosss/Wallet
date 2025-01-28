@@ -37,7 +37,6 @@ async function getUserTransactions(userId: number) {
 }
 
 async function deleteTransaction(id: number) {
-    console.log(id);
     return prisma.transaction.delete({
         where: {
             id,

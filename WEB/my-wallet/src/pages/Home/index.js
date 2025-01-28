@@ -84,8 +84,8 @@ export default function Home() {
                         type={transaction.type}
                         loadTransactions={loadTransactions}
                         editing={editing}
-                    />
-                ))}
+                        />
+                    ))}
                     </Transactions>}
                 <Balance type={balance > 0 ? "income" : "expense"} value={formatToBRL(balance, balance > 0 ? "income" : "expense")} />
 

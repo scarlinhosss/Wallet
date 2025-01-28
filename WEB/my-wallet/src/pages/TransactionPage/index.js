@@ -24,6 +24,7 @@ export default function TransactionPage() {
 
     useEffect(() => {
         loadTransaction();
+        // eslint-disable-next-line
     }, []);
 
     function handleChange({ name, value }) {
@@ -51,8 +52,9 @@ export default function TransactionPage() {
         
         const body = {
             ...form,
-            value: Number(form.value.replace("R$", "").replace(".", "").replace(",", ".")),
-            id: newTransaction ? 0 : transactionId,
+            value: parseFloat(form.value.replace("R$", "").replace(".", "").replace(",", ".")),
+            description: String(form.description),
+            id: newTransaction ? 0 : parseInt(transactionId),
             type,
             userId: userData.userId,
         };
@@ -65,8 +67,7 @@ export default function TransactionPage() {
         } catch(error) {
             toast.error(`${error.response.data}`, toastOptions);
         };
-    }
-       
+    } 
 
     return (
         <Container>
@@ -81,7 +82,7 @@ export default function TransactionPage() {
                     type="text"
                     id="value"
                     placeholder="Valor"
-                    value={form.value}
+                    value={formatToBRL(form.value)}
                     required
                     onChange={(e) => handleChange({
                         name: e.target.id,
@@ -98,7 +99,7 @@ export default function TransactionPage() {
                         name: e.target.id,
                         value: e.target.value,
                     })}
-                />
+                    />
                 <Button value={`${newTransaction ? "Salvar" : "Atualizar"} ${type === "income" ? "entrada" : "saída"}`} />
             </form>
         </Container>

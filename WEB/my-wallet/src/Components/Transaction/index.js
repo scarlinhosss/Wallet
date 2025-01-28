@@ -29,7 +29,10 @@ export default function Transaction({ id, date, description, value, type, loadTr
                 <p className="date">{dayjs(date).format("DD/MM")}</p>
                 <p className="description">{description}</p>
                 <p className="value">{value}</p>
-                {editing && <IoCloseOutline onClick={setDeleting}/>}
+                {editing && <IoCloseOutline onClick={(e) => {
+                    e.stopPropagation();
+                    setDeleting(true);
+                }} />}
             </Container>
             
             {deleting && (
