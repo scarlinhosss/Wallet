@@ -3,7 +3,7 @@ import httpStatus from "http-status";
 import sessionServices from "../services/session-service";
 import { userParams } from "../protocols";
 import { errorMessages } from "../utils/error-utils";
-import userServices from "@/services/user-service";
+import userServices from "../services/user-service";
 
 export async function createUser(req: Request, res: Response) {
     const { name, email, password, password_confirmation } = req.body as userParams

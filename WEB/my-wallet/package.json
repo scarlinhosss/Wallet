@@ -7,6 +7,7 @@
     "cors": "^2.8.5",
     "cra-template": "1.2.0",
     "dayjs": "^1.11.13",
+    "dotenv": "^16.4.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.1",
@@ -18,7 +19,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prod": "node ./server.js"
   },
   "eslintConfig": {
     "extends": [
