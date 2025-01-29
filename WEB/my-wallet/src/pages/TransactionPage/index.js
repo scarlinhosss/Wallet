@@ -52,7 +52,7 @@ export default function TransactionPage() {
         
         const body = {
             ...form,
-            value: parseFloat(form.value.replace("R$", "").replace(".", "").replace(",", ".")),
+            value: parseFloat(form.value.replace("R$", "").replaceAll(".", "").replace(",", ".")),
             description: String(form.description),
             id: newTransaction ? 0 : parseInt(transactionId),
             type,
