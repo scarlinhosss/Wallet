@@ -21,8 +21,8 @@ export default function ConfirmAlert({ id, token, setDeleting, loadTransactions 
         <Container>
             <p>Deseja realmente deletar a transação?</p>
             <div className="buttons">
-                <div className="button yes" onClick={handleDeleteTransaction}>Sim</div>
                 <div className="button cancel" onClick={() => setDeleting(false)}>Cancelar</div>
+                <div className="button delete" onClick={handleDeleteTransaction}>Deletar</div>
             </div>
         </Container>
     )
