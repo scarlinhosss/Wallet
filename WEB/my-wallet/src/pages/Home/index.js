@@ -30,9 +30,10 @@ export default function Home() {
     async function loadTransactions() {
         try {
             const response = await getTransactions(userData.userId, userData.token);
-
+            console.log(response.transactions)
             if(response) {
                 setTransactions(response.transactions);
+                console.log(response.transactions);
                 setBalance(response.balance);
             }
         } catch(error) {

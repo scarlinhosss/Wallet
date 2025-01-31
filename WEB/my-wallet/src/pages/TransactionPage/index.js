@@ -5,7 +5,7 @@ import { useNavigate, useLocation, useParams, Link } from "react-router-dom";
 import Button from "../../Components/Button";
 import Input from "../../Components/Input";
 import { Container, Header } from "./styles";
-import { formatToBRL } from "../../utils/valueHandler-utils";
+import { formatThousandToBRL } from "../../utils/valueHandler-utils";
 /* import { postTransactions } from "../../services/transaction-service"; */
 import { toast } from "react-toastify";
 import { toastOptions } from "../../utils/toastOptions-utils";
@@ -37,7 +37,7 @@ export default function TransactionPage() {
 
         try {
             const response = await getTransactionById(transactionId, userData.token);
-            console.log(response);
+            console.log(response.value);
             if(response) {
                 setForm({ value: response.value, description: response.description });
             }
@@ -82,11 +82,11 @@ export default function TransactionPage() {
                     type="text"
                     id="value"
                     placeholder="Valor"
-                    value={formatToBRL(form.value)}
+                    value={formatThousandToBRL(form.value)}
                     required
                     onChange={(e) => handleChange({
                         name: e.target.id,
-                        value: formatToBRL(e.target.value),
+                        value: formatThousandToBRL(e.target.value),
                     })}
                 />
                 <Input
