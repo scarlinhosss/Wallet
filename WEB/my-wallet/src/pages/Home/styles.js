@@ -1,11 +1,28 @@
 import styled from "styled-components"
 
 export const Container = styled.div `
-    max-width: 100%;
-    height: 100vh;
     display: flex;
-    padding: 20px; 
     flex-direction: column;
+    height: 100vh;
+
+    @media only screen and (max-width: 767px){
+        max-width: 100%;
+        padding: 20px; 
+    }
+
+    @media only screen and (min-width: 768px){
+        max-width: 70%;
+        padding: 20px;
+        justify-content: space-between;
+        margin: 0 auto;
+    }
+
+    @media only screen and (min-width: 1024px){
+        max-width: 50%;
+        padding: 20px;
+        justify-content: space-between;
+        margin: 0 auto;
+    }
 
     h1 {
         color: white;
