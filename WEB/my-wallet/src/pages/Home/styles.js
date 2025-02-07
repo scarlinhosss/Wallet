@@ -4,11 +4,8 @@ export const Container = styled.div `
     display: flex;
     flex-direction: column;
     height: 100vh;
-
-    @media only screen and (max-width: 767px){
-        max-width: 100%;
-        padding: 20px; 
-    }
+    max-width: 100%;
+    padding: 20px;
 
     @media only screen and (min-width: 768px){
         max-width: 70%;

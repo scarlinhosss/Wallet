@@ -1,7 +1,10 @@
-import { StyledInput } from "./styles";
+import { Container, StyledInput } from "./styles";
 
 export default function Input({ ...rest }) {
     return (
-        <StyledInput {...rest} />
+        <Container>
+            <StyledInput {...rest} />
+            {rest.icon}
+        </Container>
     );
 }

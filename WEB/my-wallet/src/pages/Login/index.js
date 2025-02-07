@@ -1,6 +1,7 @@
 
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { FaEye } from "react-icons/fa";
 
 import Button from "../../Components/Button";
 import Input from "../../Components/Input";
@@ -10,11 +11,15 @@ import UserContext from "../../contexts/UserContext";
 import { saveOnLocalStorage } from "../../utils/context-utils";
 import { toast } from "react-toastify";
 import { toastOptions } from "../../utils/toastOptions-utils";
+import PasswordParams from "../../Components/PasswordParams";
 
 export default function Login() {
     const { setUserData } = useContext(UserContext);
     const navigate = useNavigate();
     const [form, setForm] = useState({ email: "", password: "" });
+    const [passwordType, setPasswordType] = useState("password");
+    const [onPassword, setOnPassword] = useState(false);
+    console.log(passwordType);
 
     function handleChange({ name, value }) {
         setForm({ ...form, [name]: value });
@@ -55,18 +60,22 @@ export default function Login() {
                     })}
                 />
                 <Input
-                    type="password"
+                    type={passwordType}
                     id="password"
                     placeholder="Senha"
+                    onFocus={() => setOnPassword(!onPassword)}
                     value={form.password}
                     required
                     pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_].*[\W_])[A-Za-z\d\W_]{8,50}$"
-
+                    icon={<FaEye onClick={() => setPasswordType(passwordType === "password" ? "text" : "password")} />}
                     onChange={(e) => handleChange({
                         name: e.target.id,
                         value: e.target.value,
                     })}
                 />
+
+                {onPassword && <PasswordParams/>}
+
                 <Button value="Entrar" />
             </form>
             <Link to="signUp">Primeira vez? Cadastre-se!</Link>
