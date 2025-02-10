@@ -3,12 +3,25 @@ import styled from "styled-components";
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
-    max-width: 100%;
     height: 100vh;
-    padding: 0 20px;
-    justify-content: center;
-    align-items: center;
+    max-width: 100%;
+    padding: 20px;
 
+    @media only screen and (min-width: 768px) and (max-width: 1023px){
+        max-width: 70%;
+        padding: 20px;
+        justify-content: space-between;
+        margin: 0 auto;
+    }
+    
+    @media only screen and (min-width: 1024px){
+        justify-content: center;
+        align-items: center;
+        h1 {
+            color: red;
+        }
+    }
+    
     a {
         color: white;
         margin-top: 30px;

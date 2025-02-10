@@ -11,14 +11,12 @@ import UserContext from "../../contexts/UserContext";
 import { saveOnLocalStorage } from "../../utils/context-utils";
 import { toast } from "react-toastify";
 import { toastOptions } from "../../utils/toastOptions-utils";
-import PasswordParams from "../../Components/PasswordParams";
 
 export default function Login() {
     const { setUserData } = useContext(UserContext);
     const navigate = useNavigate();
     const [form, setForm] = useState({ email: "", password: "" });
     const [passwordType, setPasswordType] = useState("password");
-    const [onPassword, setOnPassword] = useState(false);
     console.log(passwordType);
 
     function handleChange({ name, value }) {
@@ -63,7 +61,6 @@ export default function Login() {
                     type={passwordType}
                     id="password"
                     placeholder="Senha"
-                    onFocus={() => setOnPassword(!onPassword)}
                     value={form.password}
                     required
                     pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_].*[\W_])[A-Za-z\d\W_]{8,50}$"
@@ -73,8 +70,6 @@ export default function Login() {
                         value: e.target.value,
                     })}
                 />
-
-                {onPassword && <PasswordParams/>}
 
                 <Button value="Entrar" />
             </form>

@@ -8,10 +8,12 @@ import { Container } from "./styles";
 import { toast } from "react-toastify";
 import { toastOptions } from "../../utils/toastOptions-utils";
 import { signUp } from "../../services/session-api";
+import PasswordParams from "../../Components/PasswordParams";
 
 export default function SignUp() {
     const navigate = useNavigate();
     const [form, setForm] = useState({name: "", email: "", password: "", password_confirmation: ""  });
+    const [onPassword, setOnPassword] = useState(false);
 
     function handleChange({ name, value }) {
         setForm({ ...form, [name]: value });
@@ -61,6 +63,7 @@ export default function SignUp() {
                     id="password"
                     placeholder="Senha"
                     value={form.password}
+                    onFocus={() => setOnPassword(!onPassword)}
                     required
                     pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_].*[\W_])[A-Za-z\d\W_]{8,50}$"
 
@@ -82,6 +85,7 @@ export default function SignUp() {
                         value: e.target.value,
                     })}
                 />
+                 {onPassword && <PasswordParams/>}
                 <Button value="Cadastrar" />
             </form>
             <Link to="/">Já tem uma conta? Entre agora!</Link>
